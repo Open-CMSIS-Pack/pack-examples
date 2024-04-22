@@ -1,0 +1,39 @@
+// File: STM32U0x1_0x3.dbgconf
+// Version: 1.0.0
+// Note: refer to STM32U0 Reference manual (RM0503)
+//       refer to STM32U083xC, STM32U073x8/B/C, STM32U031x4/6/8 datasheets
+
+// <<< Use Configuration Wizard in Context Menu >>>
+
+// <h> Debug MCU configuration register (DBGMCU_CR)
+//   <o.2>  DBG_STANDBY              <i> Debug standby mode
+//   <o.1>  DBG_STOP                 <i> Debug stop mode
+// </h>
+DbgMCU_CR = 0x00000006;
+
+// <h> DBGMCU APB1 freeze register (DBGMCU_APB1FZR)
+//                                   <i> Reserved bits must be kept at reset value
+//   <o.31> DBG_LPTIM1_STOP          <i> LPTIM1 is frozen while CPU is in debug mode
+//   <o.30> DBG_LPTIM2_STOP          <i> LPTIM2 is frozen while CPU is in debug mode
+//   <o.12> DBG_IWDG_STOP            <i> IWDG is frozen while CPU is in debug mode
+//   <o.11> DBG_WWDG_STOP            <i> WWDG is frozen while CPU is in debug mode
+//   <o.10> DBG_RTC_STOP             <i> RTC counter is frozen while CPU is in debug mode
+//   <o.5>  DBG_TIM7_STOP            <i> TIM7 is frozen while CPU is in debug mode
+//   <o.4>  DBG_TIM6_STOP            <i> TIM6 is frozen while CPU is in debug mode
+//   <o.1>  DBG_TIM3_STOP            <i> TIM3 is frozen while CPU is in debug mode
+//   <o.0>  DBG_TIM2_STOP            <i> TIM2 is frozen while CPU is in debug mode
+
+
+// </h>
+DbgMCU_APB1FZR = 0xC0001C33;
+
+// <h> DBGMCU APB2 freeze register (DBGMCU_APB2FZR)
+//                                   <i> Reserved bits must be kept at reset value
+//   <o.18> DBG_LPTIM3_STOP          <i> LPTIM3 is frozen while CPU is in debug mode
+//   <o.17> DBG_TIM16_STOP           <i> TIM16 is frozen while CPU is in debug mode
+//   <o.16> DBG_TIM15_STOP           <i> TIM15 is frozen while CPU is in debug mode
+//   <o.11> DBG_TIM1_STOP            <i> TIM1 is frozen while CPU is in debug mode
+// </h>
+DbgMCU_APB2FZR = 0x00070800;
+
+// <<< end of configuration section >>>
