@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.7.28" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.28/schema/PACK.xsd">
+  <name>NUCLEO-U031R8_BSP</name>
+  <vendor>Keil</vendor>
+  <description>STMicroelectronics STM32U0 Series NUCLEO-U031R8 Board Support Pack</description>
+  <url>https://www.keil.com/pack/</url>
+
+  <license>LICENSE</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license name="LICENSE" title="Apache 2.0 open-source license" spdx="Apache-2.0"/>
+    </licenseSet>
+  </licenseSets>
+
+  <releases>
+    <release version="1.0.0-dev0">
+      Board description and documentation for NUCLEO-U031R8
+      Drivers:
+      - CMSIS-Driver VIO
+    </release>
+  </releases>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>ST</keyword>
+    <keyword>Board Support Pack</keyword>
+    <keyword>STM32U0</keyword>
+    <keyword>NUCLEO-U031R8</keyword>
+  </keywords>
+
+  <requirements>
+    <packages>
+      <package vendor="Keil" name="STM32U0xx_DFP" version="1.1.0-0"/>
+      <package vendor="ARM"  name="CMSIS"         version="6.0.0-0"/>
+    </packages>
+  </requirements>
+
+  <conditions>
+    <!-- Device Condition -->
+    <condition id="STM32U031">
+      <description>STMicroelectronics STM32U031 Devices</description>
+      <require Dvendor="STMicroelectronics:13" Dname="STM32U031*"/>
+    </condition>
+
+    <!-- Device + CubeMX Condition -->
+    <condition id="STM32U031 CubeMX">
+      <description>Virtual I/O NUCLEO-U031R8</description>
+      <require condition="STM32U031"/>
+      <require Cclass="Device" Cgroup="CubeMX"/>
+    </condition>
+  </conditions>
+
+  <components>
+    <!-- CMSIS VIO Driver component for NUCLEO-U031R8 -->
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "NUCLEO-U031R8" Cversion="2.0.0" Capiversion="1.0.0" condition="STM32U031 CubeMX">
+      <description>Virtual I/O implementation for NUCLEO-U031R8</description>
+      <RTE_Components_h>
+        #define RTE_VIO_BOARD
+        #define RTE_VIO_NUCLEO_U031R8
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/vio_NUCLEO-U031R8.c"/>
+      </files>
+    </component>
+  </components>
+
+  <boards>
+    <!-- NUCLEO-U031R8 Board Support-->
+    <board vendor="STMicroelectronics" name="NUCLEO-U031R8" revision="Rev.B"
+           salesContact="https://www.st.com/content/st_com/en/contact-us.html"
+           orderForm   ="https://www.st.com/en/evaluation-tools/nucleo-u031r8.html">
+      <description>STM32 Discovery development board with STM32U031R8 MCU</description>
+      <image small="Images/NUCLEO-U031R8_small.jpg"
+             large="Images/NUCLEO-U031R8_large.jpg" public="true"/>
+      <book category="overview"  name="https://www.st.com/en/evaluation-tools/nucleo-u031r8.html" title="STM32 Nucleo-64 development board with STM32U031R8 MCU"/>
+      <book category="schematic" name="https://www.st.com/resource/en/schematic_pack/mb1932-u031r8-b01-schematic.pdf" title="Schematics revB-01" public="true"/>
+      <book category="manual"    name="https://www.st.com/resource/en/user_manual/um3256-stm32-nucleo64-boards-mb1932-stmicroelectronics.pdf" title="User Manual" public="true"/>
+      <book category="other"     name="Documents/README.md" title="Guide" public="true"/>
+      <mountedDevice    deviceIndex="0" Dvendor="STMicroelectronics:13" Dname="STM32U031R8Tx"/>
+      <compatibleDevice deviceIndex="0" Dvendor="STMicroelectronics:13" DsubFamily="STM32U031"/>
+      <feature type="ODbg"          n="1"                name="On-board STLINK-V2EC"/>
+      <feature type="PWR"           n="4"                name="USB VBUS, ext. VIN, ext. 5V, ext +3.3V"/>
+      <feature type="LED"           n="1"                name="User LED shared with ARDUINO Uno V3"/>
+      <feature type="Button"        n="2"                name="Push-Buttons for Reset and User"/>
+      <feature type="ArduinoFF"     n="1"                name="ARDUINO® Uno V3 expansion connectors"/>
+      <feature type="CustomFF"      n="1"                name="STMicroelectronics Morpho connector"/>
+      <debugInterface adapter="ST-Link" connector="USB Type-C"/>
+      <debugProbe connector="USB Type-C" debugClock="10000000" debugLink="swd" name="ST-Link"/>
+    </board>
+  </boards>
+</package>
