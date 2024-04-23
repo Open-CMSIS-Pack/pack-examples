@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.7.28" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.28/schema/PACK.xsd">
+  <name>B-U585I-IOT02A_BSP</name>
+  <vendor>Keil</vendor>
+  <description>STMicroelectronics STM32U5 Series B-U585I-IOT02A Board Support Pack</description>
+  <url>https://github.com/MDK-Packs/Pack/raw/master/B-U585I-IOT02A_BSP/</url>
+  <repository type="git">https://github.com/MDK-Packs/B-U585I-IOT02A_BSP.git</repository>
+  <license>LICENSE</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license name="LICENSE" title="Apache 2.0 open-source license" spdx="Apache-2.0"/>
+    </licenseSet>
+  </licenseSets>
+
+  <releases>
+    <release version="2.0.0-dev0">
+      Pack Description:
+      - Add LICENSE file
+      - Update schemaVersion (1.7.28)
+      - Add external memory information to board description     
+      Remove BSP drivers
+      CMSIS Drivers:
+      - Update VIO driver to API 1.0.0
+      - Remove CMSIS WiFi_EMW3080 driver
+      Remove examples
+    </release>
+    <release version="1.0.0" date="2022-05-30">
+      Board description and documentation for B-U585I-IOT02A
+      Synchronized with STM32CubeU5 Firmware Package version V1.1.0
+      Drivers:
+      - Board Drivers and Config files
+      - CMSIS WiFi Driver for on-board MXCHIP EMW3080 (SPI only)
+      - CMSIS-Driver VIO
+      Example projects:
+      - CMSIS-RTOS2 Blinky (verify the basic tool setup)
+      - CMSIS-RTOS2 Platform (configure the board hardware)
+    </release>
+  </releases>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>ST</keyword>
+    <keyword>Board Support Pack</keyword>
+    <keyword>STM32U5</keyword>
+    <keyword>B-U585I-IOT02A</keyword>
+  </keywords>
+
+  <requirements>
+    <packages>
+      <package vendor="Keil" name="STM32U5xx_DFP" version="3.0.0-0"/>
+      <package vendor="ARM"  name="CMSIS"         version="6.0.0-0"/>
+    </packages>
+  </requirements>
+
+  <conditions>
+    <!-- Device Condition -->
+    <condition id="STM32U585">
+      <description>STMicroelectronics STM32U585 Devices</description>
+      <require Dvendor="STMicroelectronics:13" Dname="STM32U585*"/>
+    </condition>
+
+    <!-- Device + CubeMX Condition -->
+    <condition id="STM32U585 CubeMX">
+      <description>Virtual I/O B-U585I-IOT02A</description>
+      <require condition="STM32U585"/>
+      <require Cclass="Device" Cgroup="CubeMX"/>
+    </condition>
+  </conditions>
+
+
+  <components>
+    <!-- CMSIS VIO Driver component for B-U585I-IOT02A -->
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "B-U585I-IOT02A" Cversion="2.0.1" Capiversion="1.0.0" condition="STM32U585 CubeMX">
+      <description>Virtual I/O implementation for B-U585I-IOT02A</description>
+      <RTE_Components_h>
+        #define RTE_VIO_BOARD
+        #define RTE_VIO_B_U585I_IOT02A
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/vio_B-U585I-IOT02A.c"/>
+      </files>
+    </component>
+  </components>
+
+  <boards>
+    <!-- B-U585I-IOT02A Board Support-->
+    <board vendor="STMicroelectronics" name="B-U585I-IOT02A" revision="Rev.C"
+           salesContact="https://www.st.com/content/st_com/en/contact-us.html"
+           orderForm   ="https://www.st.com/en/evaluation-tools/B-U585I-IOT02A.html">
+      <description>STM32 Discovery development board with STM32U585E MCU</description>
+      <image small="Images/B-U585I-IOT02A_small.jpg"
+             large="Images/B-U585I-IOT02A_large.jpg" public="true"/>
+      <book category="overview"  name="https://www.st.com/en/evaluation-tools/B-U585I-IOT02A.html" title="Discovery kit for IoT node with STM32U5 series"/>
+      <book category="schematic" name="https://www.st.com/resource/en/schematic_pack/mb1551-u585i-c02_schematic.pdf" title="Schematics revC-02" public="true"/>
+      <book category="manual"    name="https://www.st.com/resource/en/user_manual/um2839-discovery-kit-for-iot-node-with-stm32u5-series-stmicroelectronics.pdf" title="User Manual" public="true"/>
+      <book category="other"     name="Documents/README.md"                                        title="Guide"              public="true"/>
+      <mountedDevice    deviceIndex="0" Dvendor="STMicroelectronics:13" Dname="STM32U585AIIx"/>
+      <compatibleDevice deviceIndex="0" Dvendor="STMicroelectronics:13" DsubFamily="STM32U585"/>
+      <memory name="RAM-External"   access="rwx" start="0x90000000" size="0x00800000"/>
+      <memory name="Flash-External" access="rx"  start="0x70000000" size="0x04000000"/>
+      <feature type="ODbg"          n="1"                name="On-board ST-LINK-V3E"/>
+      <feature type="ROM"           n="1"                name="512-Mbit Octal-SPI Flash memory"/>
+      <feature type="RAM"           n="1"                name="64-Mbit octal-SPI PSRAM"/>
+      <feature type="MemoryOther"   n="1"                name="256-Kbit I2C EEPROM"/>
+      <feature type="PWR"           n="6"                name="USB Powered"/>
+      <feature type="PWR"           n="3"  m="5"         name="External Supply"/>
+      <feature type="ConnOther"     n="1"                name="802.11 b/g/n compliant Wi-Fi® module from MXCHIP"/>
+      <feature type="ConnOther"     n="1"                name="Bluetooth Low Energy from STMicroelectronics"/>
+      <feature type="Accelerometer" n="1"                name="3D digital Accelerometer"/>
+      <feature type="Gyro"          n="1"                name="3D Gyroscope"/>
+      <feature type="SensOther"     n="1"                name="3-axis magnetometer"/>
+      <feature type="SensOther"     n="1"                name="Relative humidity sensor"/>
+      <feature type="TempSens"      n="1"                name="Temperature sensor"/>
+      <feature type="PressSens"     n="1"                name="Pressure sensor, 260-1260 hPa absolute digital output barometer"/>
+      <feature type="LightSens"     n="1"                name="Ambient-light sensor"/>
+      <feature type="SensOther"     n="1"                name="Time-of-Flight 8x8 Multizone Ranging Sensor"/>
+      <feature type="MIC"           n="2"                name="Digital microphones"/>
+      <feature type="Other"         n="1"                name="Authentication and security for peripherals and IoT devices from STMicrolectronic"/>
+      <feature type="Button"        n="2"                name="Push-Buttons for Reset and User"/>
+      <feature type="LED"           n="7"                name="2 User LEDs"/>
+      <feature type="USB"           n="1"                name="USB Type-C Sink device FS"/>
+      <feature type="ArduinoFF"     n="1"                name="ARDUINO® Uno V3 expansion connectors"/>
+      <feature type="ConnOther"     n="1"                name="Camera module expansion connector"/>
+      <feature type="ConnOther"     n="2"                name="STMod+ expansion connectors"/>
+      <feature type="ConnOther"     n="1"                name="Pmod expansion connector"/>
+      <debugInterface adapter="ST-Link" connector="Micro-USB"/>
+      <debugProbe connector="Micro-USB" debugClock="10000000" debugLink="swd" name="ST-Link"/>
+    </board>
+  </boards>
+</package>
