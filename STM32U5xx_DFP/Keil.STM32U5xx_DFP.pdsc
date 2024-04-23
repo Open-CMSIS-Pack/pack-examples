@@ -1,0 +1,2000 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.28/schema/PACK.xsd" schemaVersion="1.7.28">
+  <vendor>Keil</vendor>
+  <name>STM32U5xx_DFP</name>
+  <description>STMicroelectronics STM32U5 Series Device Support</description>
+  <url>https://www.keil.com/pack/</url>
+  <license>LICENSE</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license name="LICENSE" title="Apache 2.0 open-source license" spdx="Apache-2.0"/>
+    </licenseSet>
+  </licenseSets>
+
+  <releases>
+    <release version="3.0.0-dev0">
+      Remove STM32CubeMX_FW_U5
+      Remove previous generator (gpdsc)
+      Add new global generator
+      Package Description (pdsc):
+      - Remove Device:Startup component
+      - Remove Device:STM32Cube HAL components
+      - Remove Device:STM32Cube LL components
+      - Remove compile device header from device description
+      - Remove not used conditions
+    </release>
+    <release version="2.2.2-dev0">
+      CMSIS Device:
+      - Updated SVD files.
+    </release>
+    <release version="2.2.1" date="2024-02-22">
+      STM32CubeMX integration:
+      - Corrected UCPD peripheral handling in FrameworkCubeMX_gpdsc.ftl
+    </release>
+    <release version="2.2.0" date="2023-11-24">
+      Devices Support:
+      - Updated STM32Cube_FW_U5 Firmware Package version to V1.3.0 (HAL v1.3.0)
+      - Added STM32U5F9/G9, STM32U5F7/G7 device support
+      - Updated SVD Files for all devices
+      - Updated SRAM2 for the STM32U5 4MB devices
+      - Renamed OSPI loader for the STM32U5 4MB
+      - Updated GCC startup files (fixed improperly closed comments)
+      - Updated GCC linker script files
+      - Corrected linker script file header
+      STM32CubeMX integration:
+      - Added Component Subgroups DSI, GFXMMU, GFXTIM, GPU2D, JPEG, LTDC, XSPI
+      - Updated GPDSC FTL file
+      CMSIS-Driver:
+      - I2C:
+      -- Updated PowerControl function (added check if Instance is valid)
+      -- Updated Control function implementation for transfer abort (added check for master mode)
+      -- Minor cleanup (removed unused extern declarations from header file)
+      - USB Device:
+      -- Updated PowerControl function (removed unnecessary NVIC handling and added check if Instance is valid)
+      - USB Host:
+      -- Updated PowerControl function (removed unnecessary NVIC handling)
+    </release>
+    <release version="2.1.0" date="2023-03-15">
+      Devices Support:
+      - Updated STM32Cube_FW_U5 Firmware Package version to V1.2.0 (HAL v1.2.0)
+      - Added STM32U595/A5, STM32U599/A9 device support
+      - Added STM32U535/45 device support
+      - Added C-Startup variant
+      - Updated SVD files
+      - Updated Flash programming algorithms
+      - Updated STM32U5 Datasheets
+      - Renamed DBGCONF file
+      Pack Description:
+      - Reworked conditions
+      - Removed HAL dependency for component ::Device:Startup
+      STM32CubeMX integration:
+      - MX_Device.h: Generated definitions for GPIO Pins with assigned labels
+      CMSIS-Driver:
+      - Updated documentation
+      - Added I2C driver
+      - Added MCI driver
+      - Added USB Host and USB Device drivers
+      - SPI:
+      -- Updated Receive function to properly support Default Tx Value transmission during reception
+         (due to STM32 HAL changed functionality)
+      -- Corrected Control function to support more than 8 data bits in DMA mode
+      -- Corrected GetDataCount function in DMA mode
+      - USART:
+      -- Corrected GetStatus function and status flags handling
+      -- Corrected Control function to support 9 data bits in DMA mode
+      -- Corrected GetTxCount and GetRxCount functions in DMA mode
+      -- Removed Rx Timeout capability and event signalization
+    </release>
+    <release version="2.0.0" date="2022-05-30">
+      STM32CubeMX integration:
+      - New workflow concept (incompatible with earlier STM32U5xx_DFPs)
+      - Automatic migration of projects, with disabled TrustZone, that were created with earlier STM32U5xx_DFPs
+      - Added STM32CubeMX integration for TrustZone enabled devices
+      - STM32CubeMX can be started with a default configuration for selected board
+    </release>
+    <release version="1.2.0" date="2022-03-25">
+      Updated Pack to STM32Cube_FW_U5 Firmware Package version V1.1.0
+      Updated reference manual, datasheets
+      Corrected partition files
+    </release>
+    <release version="1.1.1" date="2022-02-01">
+      Updated Pack to STM32Cube_FW_U5 Firmware Package version V1.0.2:
+      - Add support for STM32U585I-IOT02A OSPI external Loader
+      Devices Support:
+      - Removed 'Q' devices
+      - Updated SVD file
+      Package Description (pdsc):
+      - Updated schemaVersion (1.7.2)
+      - Added RAMstart and RAMsize attributes to Flash Algorithm elements
+      CMSIS Driver:
+      - Added UART/USART CMSIS driver
+      - Added SPI CMSIS driver
+    </release>
+    <release version="1.1.0" date="2021-07-23">
+      Updated STM32Cube Firmware U5 library to version V1.0.0
+      - First official release of HAL and LL drivers for STM32U575xx/STM32U585xx devices
+    </release>
+  </releases>
+
+  <keywords>
+    <keyword>ST</keyword>
+    <keyword>Device Support</keyword>
+    <keyword>Device Family Package STMicroelectronics</keyword>
+    <keyword>STM32U5</keyword>
+    <keyword>STM32U5xx</keyword>
+  </keywords>
+
+  <devices>
+    <family Dfamily="STM32U5 Series" Dvendor="STMicroelectronics:13">
+      <processor Dcore="Cortex-M33" DcoreVersion="r0p0" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="DSP" Dtz="TZ" Dendian="Little-endian" Dclock="160000000"/>
+      <description>
+The STM32U5 series offers advanced power-saving microcontrollers, based on Arm® Cortex®-M33 to meet the most demanding power/performance requirements for smart applications, including wearables, personal medical devices, home automation, and industrial sensors.
+Offering up to 2 Mbytes of Flash (dual bank) memory and 786 Kbytes of SRAM, the STM32U5 series of microcontrollers takes performance to the next level.
+      </description>
+
+      <book name="Documentation/arm_cortex_m33_dgug_100235_0004_00_en.pdf"  title="Arm Cortex-M33 Devices"/>
+      <book name="Documentation/RM0456.pdf" title="STM32U575/585 Arm-based 32-bit MCUs Reference Manual"/>
+
+      <algorithm name="CMSIS/Flash/MX25LM51245G_STM32U575I-EVAL.FLM"    start="0x70000000" size="0x04000000" RAMstart="0x20000000" RAMsize="0xA0000" default="0" />
+      <algorithm name="CMSIS/Flash/MX25LM51245G_STM32U585I_IOT02A.FLM"  start="0x70000000" size="0x04000000" RAMstart="0x20000000" RAMsize="0xA0000" default="0" />
+      <algorithm name="CMSIS/Flash/MX25LM51245G_STM32U599J-DK.FLM"      start="0x90000000" size="0x04000000" RAMstart="0x20000000" RAMsize="0xFFF4"  default="0" />
+
+      <debugvars configfile="CMSIS/Debug/STM32U535_545_575_585_59x_5Ax.dbgconf" version="1.0.0">
+        __var DbgMCU_CR       = 0x00000006;   // DBGMCU_CR: DBG_STOP, DBG_STANDBY
+        __var DbgMCU_APB1L_Fz = 0x00000000;   // DGBMCU_APB1L_FZ: All Peripherals Operate as in Normal Mode
+        __var DbgMCU_APB1H_Fz = 0x00000000;   // DGBMCU_APB1H_FZ: All Peripherals Operate as in Normal Mode
+        __var DbgMCU_APB2_Fz  = 0x00000000;   // DGBMCU_APB2_FZ : All Peripherals Operate as in Normal Mode
+        __var DbgMCU_APB3_Fz  = 0x00000000;   // DBGMCU_APB3FZR : All Peripherals Operate as in Normal Mode
+        __var DbgMCU_AHB1_Fz  = 0x00000000;   // DBGMCU_AHB1FZR : All Peripherals Operate as in Normal Mode
+        __var DbgMCU_AHB3_Fz  = 0x00000000;   // DBGMCU_AHB3FZR : All Peripherals Operate as in Normal Mode
+        __var TraceClk_Pin    = 0x00040002;   // PE2 (Note: PA8 uses AF12)
+        __var TraceD0_Pin     = 0x00020009;   // PC9
+        __var TraceD1_Pin     = 0x0002000A;   // PC10
+        __var TraceD2_Pin     = 0x00040005;   // PE5
+        __var TraceD3_Pin     = 0x0002000C;   // PC12
+        __var DoOptionByteLoading = 0;        // Disabled
+      </debugvars>
+
+      <sequences>
+        <!-- Override for Pre-Defined Sequences -->
+        <sequence name="DebugDeviceUnlock">
+          <block>
+            __var traceSWO    = (__traceout &amp; 0x1) != 0;                        // SWO enabled?
+            __var traceTPIU   = (__traceout &amp; 0x2) != 0;                        // Synchronous trace port enabled?
+
+            Sequence("CheckID");
+          </block>
+
+          <control if="traceSWO">
+            <block>
+              Sequence("ConfigureTraceSWOClock");
+            </block>
+          </control>
+
+          <control if="traceTPIU">
+            <block>
+              Sequence("ConfigureTraceTPIUClock");
+            </block>
+          </control>
+
+        </sequence>
+
+        <sequence name="DebugCoreStart">
+          <block>
+            // Replication of Standard Functionality
+            Write32(0xE000EDF0, 0xA05F0001);                                        // Enable Core Debug via DHCSR
+
+            // Device Specific Debug Setup
+            Write32(0xE0044004, DbgMCU_CR | (Read32(0xE0044004) &amp; 0xF0));       // DBGMCU_CR: Configure MCU Debug
+            Write32(0xE0044008, DbgMCU_APB1L_Fz);                                   // DBGMCU_APB1_FZ: Configure APB1L Peripheral Freeze Behavior
+            Write32(0xE004400C, DbgMCU_APB1H_Fz);                                   // DBGMCU_APB1_FZ: Configure APB1H Peripheral Freeze Behavior
+            Write32(0xE0044010, DbgMCU_APB2_Fz);                                    // DBGMCU_APB1_FZ: Configure APB2 Peripheral Freeze Behavior
+            Write32(0xE0044014, DbgMCU_APB3_Fz);                                    // DBGMCU_APB3FZR: Configure APB3 Peripheral Freeze Behavior
+            Write32(0xE0044020, DbgMCU_AHB1_Fz);                                    // DBGMCU_AHB1FZR: Configure AHB1 Peripheral Freeze Behavior
+            Write32(0xE0044028, DbgMCU_AHB3_Fz);                                    // DBGMCU_AHB3FZR: Configure AHB3 Peripheral Freeze Behavior
+          </block>
+        </sequence>
+
+        <!-- Override for Pre-Defined TraceStart Sequence -->
+        <sequence name="TraceStart">
+          <block>
+            __var traceSWO    = (__traceout &amp; 0x1) != 0;                        // SWO (asynchronous) Trace Selected?
+            __var traceTPIU   = (__traceout &amp; 0x2) != 0;                        // Synchronous trace port enabled?
+          </block>
+
+          <control if="traceSWO">
+            <block>
+              Sequence("EnableTraceSWO");                                           // Call SWO Trace Setup
+            </block>
+          </control>
+
+          <control if="traceTPIU">
+            <block>
+              Sequence("EnableTraceTPIU");                                          // Call TPIU Trace Setup
+            </block>
+          </control>
+
+        </sequence>
+
+        <sequence name="TraceStop">
+          <block>
+            __var traceSWO    = (__traceout &amp; 0x1) != 0;                        // SWO enabled?
+            __var traceTPIU   = (__traceout &amp; 0x2) != 0;                        // Synchronous trace port enabled?
+          </block>
+
+          <control if="traceSWO">
+            <block>
+              Sequence("DisableTraceSWO");
+            </block>
+          </control>
+
+          <control if="traceTPIU">
+            <block>
+              Sequence("DisableTraceTPIU");
+            </block>
+          </control>
+        </sequence>
+
+        <!-- User-Defined Sequences -->
+        <sequence name="CheckID">
+          <block>
+            __var pidr1 = 0;
+            __var pidr2 = 0;
+            __var jep106id = 0;
+            __var ROMTableBase = 0;
+
+            __ap = 0;      // AHB-AP
+
+            ROMTableBase = ReadAP(0xF8) &amp; ~0x3;
+
+            pidr1 = Read32(ROMTableBase + 0x0FE4);
+            pidr2 = Read32(ROMTableBase + 0x0FE8);
+            jep106id = ((pidr2 &amp; 0x7) &lt;&lt; 4 ) | ((pidr1 &gt;&gt; 4) &amp; 0xF);
+          </block>
+
+          <control if="jep106id != 0x20">
+            <block>
+              Query(0, "Not a genuine ST Device! Abort connection", 1);
+              Message(2, "Not a genuine ST Device! Abort connection.");
+            </block>
+          </control>
+        </sequence>
+
+        <sequence name="EnableTraceSWO">
+          <block>
+            Sequence("ConfigureTraceSWOPin");
+            Sequence("ConfigureTraceSWOClock");
+          </block>
+        </sequence>
+
+        <sequence name="DisableTraceSWO">
+          <block>
+            __var dbgmcu_val       = 0;                                             // DBGMCU_CR Value
+          </block>
+
+          <block info="unconfigure Trace Port and Clock Enable + Trace I/O Enable + Trace Mode Asynchronous">
+            dbgmcu_val = Read32(0xE0044004) &amp; (~0xF0);                          // Read DBGMCU_CR and clear trace setup
+            Write32(0xE0044004, dbgmcu_val);                                        // Write DBGMCU_CR: Trace Settings
+          </block>
+        </sequence>
+
+        <sequence name="EnableTraceTPIU">
+          <block>
+            Sequence("ConfigureTraceTPIUPins");
+            Sequence("ConfigureTraceTPIUClock");
+          </block>
+        </sequence>
+
+        <sequence name="DisableTraceTPIU">
+          <block>
+            __var dbgmcu_val       = 0;                                             // DBGMCU_CR Value
+          </block>
+
+          <block info="unconfigure Trace I/O Enable + Trace Mode Synchronous">
+            dbgmcu_val = Read32(0xE0044004) &amp; (~0xF0);                          // Read DBGMCU_CR and clear trace setup
+            Write32(0xE0044004, dbgmcu_val);                                        // Write DBGMCU_CR: Trace Settings
+          </block>
+        </sequence>
+
+        <sequence name="ConfigureTraceSWOClock">
+          <block>
+            __var dbgmcu_val       = 0;                                             // DBGMCU_CR Value
+            __var dbgmcu_trace_val = 0;                                             // DBGMCU_CR Value
+
+            dbgmcu_val        = Read32(0xE0044004) &amp; (~0xF0);                   // Read DBGMCU_CR and clear trace setup
+            dbgmcu_trace_val  = (1 &lt;&lt; 5) | (1 &lt;&lt; 4);                    // Trace Port and Clock Enable + Trace I/O Enable + Trace Mode Asynchronous
+          </block>
+
+          <block info="configure Trace I/O Enable + Trace Mode Asynchronous">
+            Write32(0xE0044004, dbgmcu_val | dbgmcu_trace_val);                     // Write DBGMCU_CR: Trace Settings
+          </block>
+        </sequence>
+
+        <sequence name="ConfigureTraceTPIUClock">
+          <block>
+            __var width            = (__traceout &amp; 0x003F0000) &gt;&gt; 16;
+            __var dbgmcu_val       = 0;                                             // DBGMCU_CR Value
+            __var dbgmcu_trace_val = 0;                                             // DBGMCU_CR Value
+
+            dbgmcu_val = Read32(0xE0044004) &amp; (~0xF0);                          // Read DBGMCU_CR and clear trace setup
+          </block>
+
+          <control if="width &gt;= 1" info="TPIU port width 1">
+            <block info="configure Trace Port and Clock Enable + Trace I/O Enable + Trace Mode Synchronous 1 bit">
+              dbgmcu_trace_val  = (3 &lt;&lt; 5) | (1 &lt;&lt; 4);
+            </block>
+          </control>
+
+          <control if="width &gt;= 2" info="TPIU port width 2">
+            <block info="configure Trace Port and Clock Enable + Trace I/O Enable + Trace Mode Synchronous 2 bit">
+              dbgmcu_trace_val  = (5 &lt;&lt; 5) | (1 &lt;&lt; 4);
+            </block>
+          </control>
+
+          <control if="width &gt;= 4" info="TPIU port width 4">
+            <block info="configure Trace Port and Clock Enable + Trace I/O Enable + Trace Mode Synchronous 4 bit">
+              dbgmcu_trace_val  = (7 &lt;&lt; 5) | (1 &lt;&lt; 4);
+            </block>
+          </control>
+
+          <block info="configure Trace I/O Enable + Trace Mode Asynchronous">
+            Write32(0xE0044004, dbgmcu_val | dbgmcu_trace_val);                     // Write DBGMCU_CR: Trace Settings
+          </block>
+        </sequence>
+
+        <sequence name="ConfigureTraceSWOPin">
+          <block>
+            __var pin     = 0;
+            __var port    = 0;
+            __var portAdr = 0;
+            __var pos     = 0;
+            __var secOffs = 0x00000000;
+
+            __var SWO_Pin = 0x00010003;                                             // PB3
+          </block>
+
+          <control if="(Read32(0xE000EFB8) &amp; 0x000000F0) == 0x000000F0" info="Secure debug enabled?">
+            <block>
+              secOffs = 0x10000000;
+            </block>
+          </control>
+
+          <!-- configure SWO -->
+          <block info="configure SWO">
+            pin     = ((SWO_Pin            ) &amp; 0x0000FFFF);
+            port    = ((SWO_Pin &gt;&gt; 16) &amp; 0x0000FFFF);
+            portAdr = 0x42020000 + secOffs + (port * 0x400);
+
+            pos = pin * 2;
+            Write32(0x4002108C + secOffs, ((Read32(0x4002108C + secOffs)             ) | (1 &lt;&lt; port)) );  // RCC_AHB2ENR1:  IO port clock enable
+
+            Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+            Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+            Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+          </block>
+          <control if="pin &lt;  8">
+            <block>
+            pos = ((pin    ) &amp; 7) * 4;
+            Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRL:    Alternate Function to AF0
+            </block>
+          </control>
+          <control if="pin &gt;= 8">
+            <block>
+            pos = ((pin - 8) &amp; 7) * 4;
+            Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRH:    Alternate Function to AF0
+            </block>
+          </control>
+        </sequence>
+
+        <sequence name="ConfigureTraceTPIUPins">
+          <block>
+            __var pin     = 8;
+            __var port    = 0;
+            __var portAdr = 0;
+            __var pos     = 0;
+            __var secOffs = 0x00000000;
+            __var width   = (__traceout &amp; 0x003F0000) &gt;&gt; 16;
+          </block>
+
+          <control if="(Read32(0xE000EFB8) &amp; 0x000000F0) == 0x000000F0" info="Secure debug enabled?">
+            <block>
+              secOffs = 0x10000000;
+            </block>
+          </control>
+
+            <!-- configure TRACECLK -->
+            <block info="configure TRACECLK">
+              pin     = (TraceClk_Pin            ) &amp; 0x0000FFFF;
+              port    = (TraceClk_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x42020000 + secOffs + (port * 0x400);
+
+              pos = pin * 2;
+              Write32(0x4002108C + secOffs, ((Read32(0x4002108C + secOffs)             ) | (1 &lt;&lt; port)) );  // RCC_AHB2ENR1:  IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+              pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+              pos = ((pin - 8) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+              <control if="TraceClk_Pin == 0x00000008" info="PA8 uses AF12">
+                <block>
+                pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) |      (12 &lt;&lt; pos))                    ) );  // GPIOx_AFRH:    Alternate Function to AF12
+                </block>
+              </control>
+            </control>
+
+          <control if="width &gt;= 1" info="TPIU port width 1">
+            <!-- configure TRACED0 -->
+            <block info="configure TRACED0">
+              pin     = (TraceD0_Pin            ) &amp; 0x0000FFFF;
+              port    = (TraceD0_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x42020000 + secOffs + (port * 0x400);
+
+              pos = pin * 2;
+              Write32(0x4002108C + secOffs, ((Read32(0x4002108C + secOffs)             ) | (1 &lt;&lt; port)) );  // RCC_AHB2ENR1:  IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+              pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+              pos = ((pin - 8) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+          </control>
+
+          <control if="width &gt;= 2" info="TPIU port width 2">
+            <!-- configure TRACED1 -->
+            <block info="configure TRACED1">
+              pin     = (TraceD1_Pin            ) &amp; 0x0000FFFF;
+              port    = (TraceD1_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x42020000 + secOffs + (port * 0x400);
+
+              pos = pin * 2;
+              Write32(0x4002108C + secOffs, ((Read32(0x4002108C + secOffs)             ) | (1 &lt;&lt; port)) );  // RCC_AHB2ENR1:  IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+              pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+              pos = ((pin - 8) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+          </control>
+
+          <control if="width &gt;= 4" info="TPIU port width 4">
+            <!-- configure TRACED2 -->
+            <block info="configure TRACED2">
+              pin     = (TraceD2_Pin            ) &amp; 0x0000FFFF;
+              port    = (TraceD2_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x42020000 + secOffs + (port * 0x400);
+
+              pos = pin * 2;
+              Write32(0x4002108C + secOffs, ((Read32(0x4002108C + secOffs)             ) | (1 &lt;&lt; port)) );  // RCC_AHB2ENR1:  IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+              pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+              pos = ((pin - 8) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+
+            <!-- configure TRACED3 -->
+            <block info="configure TRACED3">
+              pin     = (TraceD3_Pin            ) &amp; 0x0000FFFF;
+              port    = (TraceD3_Pin &gt;&gt; 16) &amp; 0x0000FFFF;
+              portAdr = 0x42020000 + secOffs + (port * 0x400);
+
+              pos = pin * 2;
+              Write32(0x4002108C + secOffs, ((Read32(0x4002108C + secOffs)             ) | (1 &lt;&lt; port)) );  // RCC_AHB2ENR1:  IO port clock enable
+              Write32(portAdr + 0x00, ((Read32(portAdr + 0x00) &amp; ~( 3 &lt;&lt; pos)) | (2 &lt;&lt; pos )) );  // GPIOx_MODER:   Set Mode (Alternate Function)
+              Write32(portAdr + 0x08, ((Read32(portAdr + 0x08)                         ) | (3 &lt;&lt; pos )) );  // GPIOx_OSPEEDR: Set Speed (Very High Speed)
+              Write32(portAdr + 0x0C, ((Read32(portAdr + 0x0C) &amp; ~( 3 &lt;&lt; pos))                    ) );  // GPIOx_PUPDR:   Set I/O to no pull-up/pull-down
+            </block>
+            <control if="pin &lt;  8">
+              <block>
+              pos = ((pin    ) &amp; 7) * 4;
+              Write32(portAdr + 0x20, ((Read32(portAdr + 0x20) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRL:    Alternate Function to AF0
+              </block>
+            </control>
+            <control if="pin &gt;= 8">
+              <block>
+              pos = ((pin - 8) &amp; 7) * 4;
+              Write32(portAdr + 0x24, ((Read32(portAdr + 0x24) &amp; ~(15 &lt;&lt; pos))                    ) );  // GPIOx_AFRH:    Alternate Function to AF0
+              </block>
+            </control>
+          </control>
+        </sequence>
+
+        <!-- default DebugPortStop extended with Option Byte Loading capability -->
+        <sequence name="DebugPortStop">
+          <block>
+            __var connectionFlash = ( __connection &amp; 0xF ) == 2 ;
+            __var FLASH_BASE = 0x40022000 ;
+            __var FLASH_CR = FLASH_BASE + 0x28 ;
+            __var OBL_LAUNCH_BIT = ( 1 &lt;&lt; 27 ) ;
+            __var LOCK_BIT = ( 1 &lt;&lt; 31 ) ;
+            __var OPTLOCK_BIT = ( 1 &lt;&lt; 30 ) ;
+            __var FLASH_KEYR = FLASH_BASE + 0x08 ;
+            __var FLASH_KEY1 = 0x45670123 ;
+            __var FLASH_KEY2 = 0xCDEF89AB ;
+            __var FLASH_OPTKEYR = FLASH_BASE + 0x10 ;
+            __var FLASH_OPTKEY1 = 0x08192A3B ;
+            __var FLASH_OPTKEY2 = 0x4C5D6E7F ;
+            __var FLASH_CR_Value = 0 ;
+            __var DoDebugPortStop = 1 ;
+            __var DP_CTRL_STAT = 0x4 ;
+            __var DP_SELECT = 0x8 ;
+          </block>
+
+          <control if="connectionFlash &amp;&amp; DoOptionByteLoading">
+            <block>
+              // unlock the FLASH_CR
+              Write32( FLASH_KEYR, FLASH_KEY1 ) ;
+              Write32( FLASH_KEYR, FLASH_KEY2 ) ;
+              // unlock the option byte block
+              Write32( FLASH_OPTKEYR, FLASH_OPTKEY1 ) ;
+              Write32( FLASH_OPTKEYR, FLASH_OPTKEY2 ) ;
+              FLASH_CR_Value = Read32( FLASH_CR ) ;
+            </block>
+            <control if="!( FLASH_CR_Value &amp; ( ( LOCK_BIT ) | ( OPTLOCK_BIT ) ) )">
+              <block>
+                DoDebugPortStop = 0 ;
+                __errorcontrol = 1 ;
+                // write OBL_LAUNCH bit (causes a reset)
+                Write32( FLASH_CR, FLASH_CR_Value | ( OBL_LAUNCH_BIT ) ) ;
+                __errorcontrol = 0 ;
+              </block>
+            </control>
+          </control>
+          <control if="DoDebugPortStop">
+            <block>
+              // Switch to DP Register Bank 0
+              WriteDP(DP_SELECT, 0x00000000);
+              // Power Down Debug port
+              WriteDP(DP_CTRL_STAT, 0x00000000);
+            </block>
+          </control>
+        </sequence>
+
+      </sequences>
+
+      <!-- ************************  Subfamily 'STM32U5F9'  ************************************ -->
+      <subFamily DsubFamily="STM32U5F9">
+        <compile define="STM32U5F9xx"/>
+        <debug svd="CMSIS/SVD/STM32U5Fx.svd"/>
+
+        <book name="Documentation/DS14395.pdf" title="STM32U5Fxxx Datasheet"/>
+
+        <memory name="SRAM12356"    access="rwx" start="0x20000000" size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000" size="0x01000000" default="1" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U5F9NJ'   ************************ -->
+        <device Dname="STM32U5F9NJHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="216"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5F9BJ'   ************************ -->
+        <device Dname="STM32U5F9BJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="208"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5F9ZJ'   ************************ -->
+        <device Dname="STM32U5F9ZJJxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="144"/>
+        </device>
+        <device Dname="STM32U5F9ZJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5F9VJ'   ************************ -->
+        <device Dname="STM32U5F9VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- ################################### 2MB ################################################ -->
+        <!-- *************************  Device 'STM32U5F9ZI'   ***************************** -->
+        <device Dname="STM32U5F9ZIJxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="144"/>
+        </device>
+        <device Dname="STM32U5F9ZITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5F9VI'   ***************************** -->
+        <device Dname="STM32U5F9VITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U5G9'  ************************************* -->
+      <subFamily DsubFamily="STM32U5G9">
+        <debug svd="CMSIS/SVD/STM32U5Gx.svd"/>
+        <compile define="STM32U5G9xx"/>
+
+        <book name="Documentation/DS14102.pdf" title="STM32U5Gxxx Datasheet"/>
+
+        <memory name="SRAM12356"    access="rwx" start="0x20000000"  size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000"  size="0x01000000" default="0" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000"  size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U5G9NJ'   ************************ -->
+        <device Dname="STM32U5G9NJHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="216"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5G9BJ'   ***************************** -->
+        <device Dname="STM32U5G9BJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="208"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5G9JJ'   ***************************** -->
+        <device Dname="STM32U5G9ZJJxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5G9ZJ'   ***************************** -->
+        <device Dname="STM32U5G9ZJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5G9VJ'   ***************************** -->
+        <device Dname="STM32U5G9VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U5F7'  ************************************* -->
+      <subFamily DsubFamily="STM32U5F7">
+        <compile define="STM32U5F7xx"/>
+        <debug svd="CMSIS/SVD/STM32U5Fx.svd"/>
+
+        <book name="Documentation/DS14395.pdf" title="STM32U5Fxxx Datasheet"/>
+
+        <memory name="SRAM12356"    access="rwx" start="0x20000000" size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000" size="0x01000000" default="1" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U5F7VJ'   ************************ -->
+        <device Dname="STM32U5F7VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U5F7VJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- ################################### 2MB ################################## -->
+        <!-- *************************  Device 'STM32U5F7VI'   ************************ -->
+        <device Dname="STM32U5F7VITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U5F7VITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U5G7'   ************************************* -->
+      <subFamily DsubFamily="STM32U5G7">
+        <compile define="STM32U5G7xx"/>
+        <debug svd="CMSIS/SVD/STM32U5Gx.svd"/>
+
+        <book name="Documentation/DS14102.pdf" title="STM32U5Gxxx Datasheet"/>
+
+        <memory name="SRAM12356"    access="rwx" start="0x20000000" size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000" size="0x01000000" default="1" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U5G7VJ'   ************************ -->
+        <device Dname="STM32U5G7VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U5G7VJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5Fx_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U595'  *********************************** -->
+      <subFamily DsubFamily="STM32U595">
+        <compile define="STM32U595xx"/>
+        <debug svd="CMSIS/SVD/STM32U595.svd"/>
+
+        <book name="Documentation/DS13633.pdf" title="STM32U59xxx Datasheet"/>
+
+        <memory name="SRAM1235"     access="rwx" start="0x20000000" size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000" size="0x01000000" default="1" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U595AJ'  ************************* -->
+        <device Dname="STM32U595AJHx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+        <device Dname="STM32U595AJHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U595ZJ'  ************************* -->
+        <device Dname="STM32U595ZJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U595ZJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U595ZJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="150"/>
+        </device>
+        <!-- *************************  Device 'STM32U595QJ'  ************************* -->
+        <device Dname="STM32U595QJIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+        <device Dname="STM32U595QJIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U595VJ'  ************************* -->
+        <device Dname="STM32U595VJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U595VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U595RJ'  ************************* -->
+        <device Dname="STM32U595RJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U595RJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- ################################### 2MB ################################## -->
+        <!-- *************************  Device 'STM32U595AI'  ************************* -->
+        <device Dname="STM32U595AIHx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+        <device Dname="STM32U595AIHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U595ZI'  ************************* -->
+        <device Dname="STM32U595ZITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U595ZITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U595ZIYx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="150"/>
+        </device>
+        <device Dname="STM32U595ZIYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="150"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U595QI'  ************************* -->
+        <device Dname="STM32U595QIIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+        <device Dname="STM32U595QIIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U595VI'  ************************* -->
+        <device Dname="STM32U595VITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U595VITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U595RI'  ************************* -->
+        <device Dname="STM32U595RITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U595RITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U5A5' crypto  **************************** -->
+      <subFamily DsubFamily="STM32U5A5">
+        <compile define="STM32U5A5xx"/>
+        <debug svd="CMSIS/SVD/STM32U5A5.svd"/>
+
+        <book name="Documentation/DS13543.pdf" title="STM32U5Axxx Datasheet"/>
+
+        <memory name="SRAM1235"     access="rwx" start="0x20000000" size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000" size="0x01000000" default="1" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U5A5AJ'  ************************* -->
+        <device Dname="STM32U5A5AJHx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+        <device Dname="STM32U5A5AJHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5A5ZJ'  ************************* -->
+        <device Dname="STM32U5A5ZJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U5A5ZJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U5A5ZJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="150"/>
+        </device>
+
+        <!-- ************************* Device 'STM32U5A5QJ' *************************** -->
+        <device Dname="STM32U5A5QJIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+        <device Dname="STM32U5A5QJIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5A5VJ'  ************************* -->
+        <device Dname="STM32U5A5VJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U5A5VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5A5RJ'  ************************* -->
+        <device Dname="STM32U5A5RJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U5A5RJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U599' DSI  ******************************* -->
+      <subFamily DsubFamily="STM32U599">
+        <compile define="STM32U599xx"/>
+        <debug svd="CMSIS/SVD/STM32U599.svd"/>
+
+        <book name="Documentation/DS13633.pdf" title="STM32U59xxx Datasheet"/>
+
+        <memory name="SRAM1235"     access="rwx" start="0x20000000" size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000" size="0x01000000" default="1" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U599BJ'  ************************* -->
+        <device Dname="STM32U599BJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="208"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U599NJ'  ************************* -->
+        <device Dname="STM32U599NJHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="216"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U599VJ'  ************************* -->
+        <device Dname="STM32U599VJTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U599VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U599ZJ'  ************************* -->
+        <device Dname="STM32U599ZJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <device Dname="STM32U599ZJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="150"/>
+        </device>
+
+        <!-- ################################### 2MB ################################## -->
+        <!-- *************************  Device 'STM32U599NI'  ************************* -->
+        <device Dname="STM32U599NIHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="216"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U599ZI'  ************************* -->
+        <device Dname="STM32U599ZIYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="150"/>
+        </device>
+        <device Dname="STM32U599ZITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U599VI'  ************************* -->
+        <device Dname="STM32U599VITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U5A9' crypto & DSI  ********************** -->
+      <subFamily DsubFamily="STM32U5A9">
+        <compile define="STM32U5A9xx"/>
+        <debug svd="CMSIS/SVD/STM32U5A9.svd"/>
+
+        <book name="Documentation/DS13543.pdf" title="STM32U5Axxx Datasheet"/>
+
+        <memory name="SRAM1235"     access="rwx" start="0x20000000" size="0x00270000" default="1" init="0" />
+        <memory name="SRAM_GFXMM"   access="rwx" start="0x24000000" size="0x01000000" default="1" init="0" />
+        <memory name="SRAM4"        access="rwx" start="0x28000000" size="0x00004000" default="1" init="0" />
+
+        <!-- ################################### 4MB ################################## -->
+        <!-- *************************  Device 'STM32U5A9NJ'  ************************* -->
+        <device Dname="STM32U5A9NJHxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="216"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5A9BJ'  ************************* -->
+        <device Dname="STM32U5A9BJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="208"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5A9ZJ'  ************************* -->
+        <device Dname="STM32U5A9ZJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U5A9ZJYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="150"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U5A9VJ'  ************************* -->
+        <device Dname="STM32U5A9VJTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00400000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0800.FLM" start="0x08000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U59x_4M_0C00.FLM" start="0x0C000000" size="0x00400000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U575' non crypto  ************************ -->
+      <subFamily DsubFamily="STM32U575">
+        <compile define="STM32U575xx"/>
+        <debug svd="CMSIS/SVD/STM32U575.svd"/>
+
+        <book name="Documentation/DS13737.pdf" title="STM32U575xx Datasheet"/>
+
+        <memory name="SRAM1_2" access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="SRAM3"   access="rwx" start="0x20040000" size="0x00080000" default="0" init="0" />
+
+        <!-- ################################### 2MB ################################## -->
+        <!-- *************************  Device 'STM32U575ZI'  ************************* -->
+        <device Dname="STM32U575ZITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U575ZITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575QI'  ************************* -->
+        <device Dname="STM32U575QIIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+        <device Dname="STM32U575QIIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575VI'  ************************* -->
+        <device Dname="STM32U575VITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U575VITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575RI'  ************************* -->
+        <device Dname="STM32U575RITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U575RITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575CI'  ************************* -->
+        <device Dname="STM32U575CITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U575CITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U575CIUx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U575CIUxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575AI'  ************************* -->
+        <device Dname="STM32U575AIIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+        <device Dname="STM32U575AIIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575OI'  ************************* -->
+        <device Dname="STM32U575OIYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="90"/>
+        </device>
+
+        <!-- ################################### 1MB ################################## -->
+        <!-- *************************  Device 'STM32U575CG'  ************************* -->
+        <device Dname="STM32U575CGUx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U575CGUxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U575CGTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U575CGTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575RG'  ************************* -->
+        <device Dname="STM32U575RGTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U575RGTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575VG'  ************************* -->
+        <device Dname="STM32U575VGTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U575VGTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575ZG'  ************************* -->
+        <device Dname="STM32U575ZGTx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U575ZGTxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575QG'  ************************* -->
+        <device Dname="STM32U575QGIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+        <device Dname="STM32U575QGIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575AG'  ************************* -->
+        <device Dname="STM32U575AGIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+        <device Dname="STM32U575AGIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U575OG'  ************************* -->
+        <device Dname="STM32U575OGYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00100000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0800.FLM" start="0x08000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_1M_0C00.FLM" start="0x0C000000" size="0x00100000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="90"/>
+        </device>
+
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U585' crypto  **************************** -->
+      <subFamily DsubFamily="STM32U585">
+        <compile define="STM32U585xx"/>
+        <debug svd="CMSIS/SVD/STM32U585.svd"/>
+
+        <book name="Documentation/DS13086.pdf" title="STM32U585xx Datasheet"/>
+
+        <memory name="SRAM1_2" access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="SRAM3"   access="rwx" start="0x20040000" size="0x00080000" default="0" init="0" />
+
+        <!-- ################################### 2MB ################################## -->
+        <!-- *************************  Device 'STM32U585ZI'  ************************* -->
+        <device Dname="STM32U585ZITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+        <device Dname="STM32U585ZITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="144"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U585QI'  ************************* -->
+        <device Dname="STM32U585QIIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+        <device Dname="STM32U585QIIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="132"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U585VI'  ************************* -->
+        <device Dname="STM32U585VITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U585VITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U585RI'  ************************* -->
+        <device Dname="STM32U585RITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U585RITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U585CI'  ************************* -->
+        <device Dname="STM32U585CITx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U585CITxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U585CIUx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U585CIUxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U585AI'  ************************* -->
+        <device Dname="STM32U585AIIx">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+        <device Dname="STM32U585AIIxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="169"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U585OI'  ************************* -->
+        <device Dname="STM32U585OIYxQ">
+          <memory name="Flash"  access="rx"                   start="0x08000000" size="0x00200000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0800.FLM" start="0x08000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_2M_0C00.FLM" start="0x0C000000" size="0x00200000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="90"/>
+        </device>
+
+      </subFamily>
+
+    <!-- ************************  Subfamily 'STM32U535' non crypto  ************************** -->
+      <subFamily DsubFamily="STM32U535">
+        <compile define="STM32U535xx"/>
+        <debug svd="CMSIS/SVD/STM32U535.svd"/>
+
+        <book name="Documentation/DS14217.pdf" title="STM32U535xx Datasheet"/>
+
+        <memory name="SRAM12"  access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="SRAM3"   access="rwx" start="0x28000000" size="0x00004000" default="0" init="0" />
+
+        <!-- ################################## 512KB ################################# -->
+        <!-- *************************  Device 'STM32U535CE'  ************************* -->
+        <device Dname="STM32U535CETx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U535CETxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U535CEUx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U535CEUxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535RE'  ************************* -->
+        <device Dname="STM32U535RETx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U535RETxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U535REIx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+        <device Dname="STM32U535REIxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535VE'  ************************* -->
+        <device Dname="STM32U535VETx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U535VETxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U535VEIx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="100"/>
+        </device>
+        <device Dname="STM32U535VEIxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535NEYxQ'  ********************** -->
+        <device Dname="STM32U535NEYxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="56"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535JEYxQ'  ********************** -->
+        <device Dname="STM32U535JEYxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="72"/>
+        </device>
+
+        <!-- ################################## 256KB ################################# -->
+        <!-- *************************  Device 'STM32U535CC'  ************************* -->
+        <device Dname="STM32U535CCTx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U535CCTxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <device Dname="STM32U535CCUx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U535CCUxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535RC'  ************************* -->
+        <device Dname="STM32U535RCTx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U535RCTxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U535RCIx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+        <device Dname="STM32U535RCIxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535VC'  ************************* -->
+        <device Dname="STM32U535VCTx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U535VCTxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+
+        <device Dname="STM32U535VCIx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="100"/>
+        </device>
+        <device Dname="STM32U535VCIxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00040000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00040000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535NCYxQ'  ********************** -->
+        <device Dname="STM32U535NCYxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_256K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="56"/>
+        </device>
+
+        <!-- ################################## 128KB ################################# -->
+        <!-- *************************  Device 'STM32U535CB'  ************************* -->
+        <device Dname="STM32U535CBTx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U535CBTxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <device Dname="STM32U535CBUx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U535CBUxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U535RB'  ************************* -->
+        <device Dname="STM32U535RBTx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U535RBTxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U535RBIx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+        <device Dname="STM32U535RBIxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00020000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0800.FLM" start="0x08000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_128K_0C00.FLM" start="0x0C000000" size="0x00020000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+      </subFamily>
+
+      <!-- ************************  Subfamily 'STM32U545' crypto  **************************** -->
+      <subFamily DsubFamily="STM32U545">
+        <compile define="STM32U545xx"/>
+        <debug svd="CMSIS/SVD/STM32U545.svd"/>
+
+        <book name="Documentation/DS14216.pdf" title="STM32U545xx Datasheet"/>
+
+        <memory name="SRAM1_2" access="rwx" start="0x20000000" size="0x00040000" default="1" init="0" />
+        <memory name="SRAM3"   access="rwx" start="0x28000000" size="0x00004000" default="0" init="0" />
+
+        <!-- ################################## 512 KB ################################ -->
+        <!-- *************************  Device 'STM32U545CE'  ************************* -->
+        <device Dname="STM32U545CETx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U545CETxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U545CEUx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+        <device Dname="STM32U545CEUxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="48"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U545RE'  ************************* -->
+        <device Dname="STM32U545RETx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U545RETxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="64"/>
+        </device>
+        <device Dname="STM32U545REIx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+        <device Dname="STM32U545REIxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U545VE'  ************************* -->
+        <device Dname="STM32U545VETx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U545VETxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="QFP" n="100"/>
+        </device>
+        <device Dname="STM32U545VEIx">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="100"/>
+        </device>
+        <device Dname="STM32U545VEIxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="BGA" n="100"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U545NEYxQ'  ********************** -->
+        <device Dname="STM32U545NEYxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="56"/>
+        </device>
+
+        <!-- *************************  Device 'STM32U545JEYxQ'  ********************** -->
+        <device Dname="STM32U545JEYxQ">
+          <memory name="Flash"  access="rx"                     start="0x08000000" size="0x00080000" default="1" startup="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0800.FLM" start="0x08000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <algorithm name="CMSIS/Flash/STM32U5xx_512K_0C00.FLM" start="0x0C000000" size="0x00080000" RAMstart="0x20000000" RAMsize="0x8000" default="1" />
+          <feature type="CSP" n="72"/>
+        </device>
+      </subFamily>
+
+    </family>
+  </devices>
+
+  <conditions>
+    <!-- Device Conditions -->
+    <condition id="STM32U5">
+      <description>STMicroelectronics STM32U5 Devices</description>
+      <require Dvendor="STMicroelectronics:13" Dname="STM32U5*"/>
+    </condition>
+
+    <!-- Device + CMSIS Conditions -->
+    <condition id="STM32U5 CMSIS">
+      <description>STMicroelectronics STM32U5 Device and CMSIS-CORE</description>
+      <require condition="STM32U5"/>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+    </condition>
+
+    <!-- CMSIS Driver Conditions -->
+    <condition id="STM32U5 CMSIS CubeMX">
+      <description>Requirement for CMSIS Driver</description>
+      <require condition="STM32U5 CMSIS"/>
+      <require Cclass="Device" Cgroup="CubeMX"/>
+    </condition>
+
+  </conditions>
+
+  <components>
+    <!-- CubeMX Generator -->
+    <component generator="CubeMX" Cclass="Device" Cgroup="CubeMX" Cversion="1.0.0" condition="STM32U5 CMSIS">
+      <description>Configuration via STM32CubeMX</description>
+      <RTE_Components_h>
+        #define RTE_DEVICE_CUBE_MX
+        #define CMSIS_device_header "stm32u5xx.h"
+      </RTE_Components_h>
+      <files>
+        <file category="doc" name="https://github.com/Open-CMSIS-Pack/cmsis-toolbox/tree/main/docs/CubeMX.md"/>
+      </files>
+    </component>
+
+    <!-- CMSIS drivers -->
+    <component Cclass="CMSIS Driver" Cgroup="I2C" Capiversion="2.2.0" Cversion="1.1.0" condition="STM32U5 CMSIS CubeMX">
+      <description>I2C Driver for STM32U5 Series</description>
+      <RTE_Components_h>
+        #define RTE_Drivers_I2C1                /* Driver I2C1 */
+        #define RTE_Drivers_I2C2                /* Driver I2C2 */
+        #define RTE_Drivers_I2C3                /* Driver I2C3 */
+        #define RTE_Drivers_I2C4                /* Driver I2C4 */
+        #define RTE_Drivers_I2C5                /* Driver I2C5 */
+        #define RTE_Drivers_I2C6                /* Driver I2C6 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/I2C_STM32U5xx.c"/>
+      </files>
+    </component>
+    <component Cclass="CMSIS Driver" Cgroup="MCI" Capiversion="2.2.0" Cversion="1.0.0" condition="STM32U5 CMSIS CubeMX">
+      <description>MCI Driver for STM32U5 Series</description>
+      <RTE_Components_h>
+        #define RTE_Drivers_MCI0                /* Driver MCI0 */
+        #define RTE_Drivers_MCI1                /* Driver MCI1 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/MCI_STM32U5xx.c"/>
+      </files>
+    </component>
+    <component Cclass="CMSIS Driver" Cgroup="SPI" Capiversion="2.1.0" Cversion="1.1.0" condition="STM32U5 CMSIS CubeMX">
+      <description>SPI Driver for STM32U5 Series</description>
+      <RTE_Components_h>
+        #define RTE_Drivers_SPI1                /* Driver SPI1 */
+        #define RTE_Drivers_SPI2                /* Driver SPI2 */
+        #define RTE_Drivers_SPI3                /* Driver SPI3 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/SPI_STM32U5xx.c"/>
+      </files>
+    </component>
+    <component Cclass="CMSIS Driver" Cgroup="USART" Capiversion="2.1.0" Cversion="1.2.0" condition="STM32U5 CMSIS CubeMX">
+      <description>USART Driver for STM32U5 Series</description>
+      <RTE_Components_h>
+        #define RTE_Drivers_USART1              /* Driver USART1 */
+        #define RTE_Drivers_USART2              /* Driver USART2 */
+        #define RTE_Drivers_USART3              /* Driver USART3 */
+        #define RTE_Drivers_USART4              /* Driver USART4 */
+        #define RTE_Drivers_USART5              /* Driver USART5 */
+        #define RTE_Drivers_USART6              /* Driver USART6 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/UART_STM32U5xx.c"/>
+        <file category="source" name="CMSIS/Driver/USART_STM32U5xx.c"/>
+        <file category="source" name="CMSIS/Driver/IrDA_STM32U5xx.c"/>
+        <file category="source" name="CMSIS/Driver/SmartCard_STM32U5xx.c"/>
+      </files>
+    </component>
+    <component Cclass="CMSIS Driver" Cgroup="USB Device" Csub="Full-speed" Capiversion="2.3.0" Cversion="1.1.0" condition="STM32U5 CMSIS CubeMX">
+      <description>USB Device Full-Speed Driver (OTG) for STM32U5 Series</description>
+      <RTE_Components_h>  <!-- the following content goes into file 'RTE_Components.h' -->
+        #define RTE_Drivers_USBD0               /* Driver USBD0 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/OTG_STM32U5xx.c"/>
+        <file category="source" name="CMSIS/Driver/USBD_OTG_STM32U5xx.c"/>
+      </files>
+    </component>
+    <component Cclass="CMSIS Driver" Cgroup="USB Host" Csub="Full-speed" Capiversion="2.3.0" Cversion="1.1.0" condition="STM32U5 CMSIS CubeMX">
+      <description>USB Host Full-Speed Driver (OTG) for STM32U5 Series</description>
+      <RTE_Components_h>
+        #define RTE_Drivers_USBH0               /* Driver USBH0 */
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/OTG_STM32U5xx.c"/>
+        <file category="source" name="CMSIS/Driver/USBH_OTG_STM32U5xx.c"/>
+      </files>
+    </component>
+  </components>
+</package>
