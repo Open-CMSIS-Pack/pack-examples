@@ -13,6 +13,10 @@
   </licenseSets>
 
   <releases>
+    <release version="2.0.0-dev1">
+      Pack Description:
+      - Add board layer
+    </release>
     <release version="2.0.0-dev0">
       Pack Description:
       - Add LICENSE file
@@ -67,7 +71,6 @@
     </condition>
   </conditions>
 
-
   <components>
     <!-- CMSIS VIO Driver component for B-U585I-IOT02A -->
     <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "B-U585I-IOT02A" Cversion="2.0.1" Capiversion="1.0.0" condition="STM32U585 CubeMX">
@@ -81,6 +84,10 @@
       </files>
     </component>
   </components>
+
+  <csolution> 
+    <clayer type="Board" path="Layers/IoT" file="Board.clayer.yml" condition="STM32U585 CubeMX"/>
+  </csolution>
 
   <boards>
     <!-- B-U585I-IOT02A Board Support-->
