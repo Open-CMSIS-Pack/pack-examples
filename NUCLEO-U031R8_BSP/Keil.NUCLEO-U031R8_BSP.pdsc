@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package schemaVersion="1.7.28" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.28/schema/PACK.xsd">
+<package schemaVersion="1.7.36" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.36/schema/PACK.xsd">
   <name>NUCLEO-U031R8_BSP</name>
   <vendor>Keil</vendor>
   <description>STMicroelectronics STM32U0 Series NUCLEO-U031R8 Board Support Pack</description>
