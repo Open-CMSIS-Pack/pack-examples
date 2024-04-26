@@ -1,0 +1,4 @@
+loadboard STM32H743I-EVAL allmodes
+project name STM32CubeMX
+project toolchain "MDK-ARM V5"
+SetCopyLibrary "copy only"

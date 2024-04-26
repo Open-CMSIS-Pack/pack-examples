@@ -1,0 +1,51 @@
+layer:
+  type: Board
+  description: STM32H743I-EVAL board setup for IoT
+  for-board: STMicroelectronics::STM32H743I-EVAL
+
+  generators:
+    options:
+      - generator: CubeMX
+        path: ./CubeMX
+        name: Board
+
+  connections:
+    - connect: STM32H743I-EVAL Board
+      provides:
+        - CMSIS_ETH: 0
+        - CMSIS_MCI: 0
+        - CMSIS_USB_Device: 0
+        - CMSIS_VIO
+        - STDIN
+        - STDOUT
+        - STDERR
+        - Heap: 1024
+
+  packs:
+    - pack: Keil::STM32H7xx_DFP@>=4.0.0-0
+    - pack: Keil::STM32H743I-EVAL_BSP@>=1.0.0-0
+    - pack: ARM::CMSIS@>=6.0.0
+    - pack: ARM::CMSIS-Driver@>=2.8.0
+    - pack: ARM::CMSIS-Compiler@>=2.0.0
+
+  components:
+    - component: Keil::Device:CubeMX
+
+    - component: ARM::CMSIS:CORE
+
+    - component: Keil::CMSIS Driver:USART
+    - component: Keil::CMSIS Driver:MCI
+    - component: Keil::CMSIS Driver:USB Device
+    - component: Keil::CMSIS Driver:Ethernet MAC
+    - component: Keil::CMSIS Driver:Ethernet PHY:LAN8742A
+    - component: Keil::CMSIS Driver:VIO:Board&STM32H743I-EVAL
+
+    - component: ARM::CMSIS-Compiler:CORE
+    - component: ARM::CMSIS-Compiler:STDERR:Custom
+    - component: ARM::CMSIS-Compiler:STDOUT:Custom
+    - component: ARM::CMSIS-Compiler:STDIN:Custom
+
+  groups:
+    - group: Board
+      files:
+        - file: ./retarget_stdio.c
