@@ -7,9 +7,9 @@ layer:
 
   generators:
     options:
-    - generator: CubeMX
-      path: ./CubeMX
-      name: Board
+      - generator: CubeMX
+        path: ./CubeMX
+        name: Board
 
   connections:
     - connect: B-U585I-IOT02A Board
