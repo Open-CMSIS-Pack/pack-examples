@@ -14,7 +14,6 @@ Start STM32CubeMX with default B-U585I-IOT02A board setup wihtout TrustZone and 
 2. Under **Pinout & Configuration** select **Categories - System Core - NVIC**:
     - Under **NVIC** tab change:
       - **USART1 global interrupt - Enabled** to **checked**
-      - **USB OTG FS global interrupt -Enabled** to **checked**
     - Under **Code Generation** tab change:
       - **System service call via SWI instruction - Generate IRQ handler** to **unchecked**
       - **Pendable request for system service - Generate IRQ handler** to **unchecked**

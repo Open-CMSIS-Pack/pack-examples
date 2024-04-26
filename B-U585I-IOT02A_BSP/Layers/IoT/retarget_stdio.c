@@ -17,11 +17,11 @@
  * limitations under the License.
  *
  *      Name:    retarget_stdio.c
- *      Purpose: Retarget stdio to ST-Link (Virtual COM Port) - UART1
+ *      Purpose: Retarget stdio to CMSIS UART
  *
  *---------------------------------------------------------------------------*/
 
-#include "USART_STM32.h"
+#include "Driver_USART.h"
 
 // Compile-time configuration
 #define USART_DRV_NUM           1
@@ -33,6 +33,7 @@ extern int stderr_putchar (int ch);
 extern int stdout_putchar (int ch);
 extern int stdin_getchar  (void);
 
+extern ARM_DRIVER_USART     ARM_Driver_USART_(USART_DRV_NUM);
 #define ptrUSART          (&ARM_Driver_USART_(USART_DRV_NUM))
 
 /**
