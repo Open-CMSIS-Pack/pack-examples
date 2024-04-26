@@ -2000,4 +2000,13 @@ Offering up to 2 Mbytes of Flash (dual bank) memory and 786 Kbytes of SRAM, the 
       </files>
     </component>
   </components>
+
+  <csolution>
+    <template name="CubeMX Basic csolution project" path="Templates/CubeMX" file="CubeMX_TZ.csolution.yml" condition="STM32U5">
+      <description>Create a CubeMX basic solution with project</description>
+    </template>
+    <template name="CubeMX TrustZone csolution project" path="Templates/CubeMX_TZ" file="CubeMX_TZ.csolution.yml" condition="STM32U5">
+      <description>Create a CubeMX TrustZone solution with secure and non-secure projects</description>
+    </template>
+  </csolution>
 </package>
