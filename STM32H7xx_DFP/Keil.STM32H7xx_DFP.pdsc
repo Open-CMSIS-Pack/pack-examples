@@ -3572,4 +3572,13 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
       </files>
     </component>
   </components>
+
+  <csolution>
+    <template name="CubeMX Basic csolution project" path="Templates/CubeMX" file="CubeMX.csolution.yml" condition="STM32H7">
+      <description>Create a CubeMX basic solution with project</description>
+    </template>
+    <template name="CubeMX Dual Core csolution project" path="Templates/CubeMX_DualCore" file="CubeMX_DualCore.csolution.yml" condition="STM32H7">
+      <description>Create a CubeMX Dual Core solution with CM4 and CM7 projects</description>
+    </template>
+  </csolution>
 </package>
