@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.7.36" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.36/schema/PACK.xsd">
+  <name>STM32H743I-EVAL_BSP</name>
+  <vendor>Keil</vendor>
+  <description>STMicroelectronics STM32H7 Series STM32H743I-EVAL Board Support Pack</description>
+  <url>https://www.keil.com/pack/</url>
+
+  <license>LICENSE</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license name="LICENSE" title="Apache 2.0 open-source license" spdx="Apache-2.0"/>
+    </licenseSet>
+  </licenseSets>
+
+  <releases>
+    <release version="1.0.0-dev0">
+      Board description and documentation for STM32H743I-EVAL
+      Drivers:
+      - CMSIS-Driver VIO
+    </release>
+  </releases>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>ST</keyword>
+    <keyword>Board Support Pack</keyword>
+    <keyword>STM32H7</keyword>
+    <keyword>STM32H743I-EVAL</keyword>
+  </keywords>
+
+  <requirements>
+    <packages>
+      <package vendor="Keil" name="STM32H7xx_DFP" version="4.0.0-0"/>
+      <package vendor="ARM"  name="CMSIS"         version="6.0.0-0"/>
+    </packages>
+  </requirements>
+
+  <conditions>
+    <!-- Device Condition -->
+    <condition id="STM32H7">
+      <description>STMicroelectronics STM32H7 Series devices</description>
+      <require Dvendor="STMicroelectronics:13" Dname="STM32H7*"/>
+      <deny    Dvendor="STMicroelectronics:13" Dname="STM32H7[R]*"/>
+      <deny    Dvendor="STMicroelectronics:13" Dname="STM32H7[S]*"/>
+    </condition>
+
+    <!-- Device + CMSIS Conditions -->
+    <condition id="STM32H7 CMSIS">
+      <description>STMicroelectronics STM32H7 Device and CMSIS-CORE</description>
+      <require condition="STM32H7"/>
+      <require Cclass="CMSIS" Cgroup="CORE"/>
+    </condition>
+
+    <!-- Device + CMSIS + CubeMX Conditions -->
+    <condition id="STM32H7 CMSIS CubeMX">
+      <description>Requirement for CMSIS Driver</description>
+      <require condition="STM32H7 CMSIS"/>
+      <require Cclass="Device" Cgroup="CubeMX"/>
+    </condition>
+  </conditions>
+
+  <components>
+    <!-- CMSIS VIO Driver component for STM32H743I-EVAL -->
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "STM32H743I-EVAL" Cversion="2.0.0" Capiversion="1.0.0" condition="STM32H7 CMSIS CubeMX">
+      <description>Virtual I/O implementation for STM32H743I-EVAL</description>
+      <RTE_Components_h>
+        #define RTE_VIO_BOARD
+        #define RTE_VIO_STM32H743I_EVAL
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/vio_STM32H743I-EVAL.c"/>
+      </files>
+    </component>
+  </components>
+
+  <boards>
+    <!-- STM32H743I-EVAL -->
+    <board vendor="STMicroelectronics" name="STM32H743I-EVAL" revision="Rev.B" salesContact="http://www.st.com/stonline/contactus/contacts/index.php">
+      <description>STMicroelectronics STM32H743I-EVAL Evaluation Board Support and Examples</description>
+      <image small="Images/stm32h743i-eval_small.png"
+             large="Images/stm32h743i-eval_large.png"/>
+      <book category="overview"  name="http://www.st.com/en/evaluation-tools/stm32h743i-eval.html" title="STM32H743I_EVAL Evaluation Board Web Page"/>
+      <book category="manual"    name="Documents/stm32h743i-eval.pdf" title="Data brief"/>
+      <mountedDevice    deviceIndex="0" Dvendor="STMicroelectronics:13" Dname="STM32H743XIHx"/>
+      <compatibleDevice deviceIndex="0" Dvendor="STMicroelectronics:13" DsubFamily="STM32H743"/>
+      <feature type="ODbg"      n="1"              name="On-board ST-LINK/V2"/>
+      <feature type="RAM"       n="1"              name="8M x 32-bit SDRAM"/>
+      <feature type="RAM"       n="1"              name="1M x 16-bit SRAM"/>
+      <feature type="ROM"       n="1"              name="8M x 16-bit Nor Flash"/>
+      <feature type="ROM"       n="1"              name="512-Mbit Quad-SPI NOR Flash"/>
+      <feature type="USB"       n="1"              name="High-Speed USB with micro-AB Connector"/>
+      <feature type="USB"       n="2"              name="Full-Speed USB with micro-AB Connector"/>
+      <feature type="Joystick"  n="1"              name="5-position Joystick"/>
+      <feature type="Camera"    n="1"/>
+      <feature type="Button"    n="2"              name="Push-Buttons for Reset, Wakeup/Tamper or Key"/>
+      <feature type="LED"       n="4"              name="4 color user LEDs"/>
+      <feature type="GLCD"      n="1"  m="800.480" name="4-inch 800x480 TFT color LCD with capacitive touch panel"/>
+      <feature type="Poti"      n="1"              name="Analog Voltage Control for ADC Input (potentiometer)"/>
+      <feature type="LineIn"    n="1"              name="Audio CODEC with Stereo Line-In/Out and Speaker/Microphone"/>
+      <feature type="LineOut"   n="1"              name="Audio CODEC with Stereo Line-In/Out and Speaker/Microphone"/>
+      <feature type="MIC"       n="2"              name="ST MEMS microphones"/>
+      <feature type="Speaker"   n="2"/>
+      <feature type="Other"     n="1"              name="Digital Stereo Microphone"/>
+      <feature type="CAN"       n="1"/>
+      <feature type="RS232"     n="1"/>
+      <feature type="I2C"       n="4"/>
+      <feature type="ETH"       n="1"              name="10/100 Ethernet Port"/>
+      <feature type="XTAL"      n="25000000"/>
+      <feature type="PWR"       n="5"              name="USB Powered"/>
+      <feature type="PWR"       n="3"  m="5"       name="External Supply"/>
+      <feature type="MemCard"   n="1"              name="SDIO interface microSD card"/>
+      <feature type="DIO"       n="34"             name="Motor Control Connector"/>
+      <feature type="DIO"       n="60"             name="Daughterboard Extension header 1"/>
+      <feature type="DIO"       n="60"             name="Daughterboard Extension header 2"/>
+      <feature type="ConnOther" n="1"              name="Motor control connector"/>
+      <debugInterface adapter="JTAG/SW" connector="20-pin JTAG (0.1 inch connector)"/>
+      <debugInterface adapter="JTAG/SW" connector="20-pin Cortex debug + ETM Trace (0.05 inch connector)"/>
+      <debugInterface adapter="ST-Link" connector="Micro-USB"/>
+      <debugProbe connector="Micro-USB" debugClock="10000000" debugLink="swd" name="ST-Link"/>
+    </board>
+  </boards>
+</package>
