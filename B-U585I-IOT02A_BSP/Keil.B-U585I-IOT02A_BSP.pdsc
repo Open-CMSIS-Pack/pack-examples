@@ -86,7 +86,7 @@
   </components>
 
   <csolution> 
-    <clayer type="Board" path="Layers/IoT" file="Board.clayer.yml" condition="STM32U585 CubeMX"/>
+    <clayer type="Board" path="Layers/IoT" file="Board.clayer.yml" copy-to="Board/B-U585I-IOT02A" condition="STM32U585 CubeMX"/>
   </csolution>
 
   <boards>
