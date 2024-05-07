@@ -73,6 +73,10 @@
     </component>
   </components>
 
+  <csolution> 
+    <clayer type="Board" path="Layers/IoT" file="Board.clayer.yml" copy-to="Board/STM32H743I-EVAL" condition="STM32H7 CMSIS CubeMX"/>
+  </csolution>
+
   <boards>
     <!-- STM32H743I-EVAL -->
     <board vendor="STMicroelectronics" name="STM32H743I-EVAL" revision="Rev.B" salesContact="http://www.st.com/stonline/contactus/contacts/index.php">
