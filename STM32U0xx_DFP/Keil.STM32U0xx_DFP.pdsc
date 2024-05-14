@@ -12,6 +12,9 @@
   </licenseSets>
 
   <releases>
+    <release version="1.1.0-dev1">
+      Removed Datasheet and Reference Manual from pack and replaced with permalink in the package description.
+    </release>
     <release version="1.1.0-dev0">
       Add global generator
     </release>
