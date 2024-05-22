@@ -61,13 +61,13 @@
     <!-- Board Condition -->
     <condition id="B-U585I-IOT02A">
       <description>STMicroelectronics B-U585I-IOT02A Board</description>
-      <require Dvendor="STMicroelectronics:13" Bname="B-U585I-IOT02A"/>
+      <require Bvendor="STMicroelectronics:13" Bname="B-U585I-IOT02A"/>
     </condition>
 
     <!-- Board + CubeMX Condition -->
     <condition id="B-U585I-IOT02A CubeMX">
       <description>B-U585I-IOT02A Board and CubeMX</description>
-      <require condition="STM32U585"/>
+      <require condition="B-U585I-IOT02A"/>
       <require Cclass="Device" Cgroup="CubeMX"/>
     </condition>
   </conditions>

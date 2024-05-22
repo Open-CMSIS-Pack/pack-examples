@@ -39,7 +39,7 @@
     <!-- Board Condition -->
     <condition id="STM32H743I-EVAL">
       <description>STMicroelectronics STM32H743I-EVAL Board</description>
-      <require Dvendor="STMicroelectronics:13" Bname="STM32H743I-EVAL"/>
+      <require Bvendor="STMicroelectronics:13" Bname="STM32H743I-EVAL"/>
     </condition>
 
     <!-- Board + CubeMX Condition -->
