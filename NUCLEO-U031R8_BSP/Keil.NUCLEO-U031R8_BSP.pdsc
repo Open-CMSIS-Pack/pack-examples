@@ -36,23 +36,23 @@
   </requirements>
 
   <conditions>
-    <!-- Device Condition -->
-    <condition id="STM32U031">
-      <description>STMicroelectronics STM32U031 Devices</description>
-      <require Dvendor="STMicroelectronics:13" Dname="STM32U031*"/>
+    <!-- Board Condition -->
+    <condition id="NUCLEO-U031R8">
+      <description>STMicroelectronics NUCLEO-U031R8 Board</description>
+      <require Bvendor="STMicroelectronics" Bname="NUCLEO-U031R8"/>
     </condition>
 
-    <!-- Device + CubeMX Condition -->
-    <condition id="STM32U031 CubeMX">
+    <!-- Board + CubeMX Condition -->
+    <condition id="NUCLEO-U031R8 CubeMX">
       <description>Virtual I/O NUCLEO-U031R8</description>
-      <require condition="STM32U031"/>
+      <require condition="NUCLEO-U031R8"/>
       <require Cclass="Device" Cgroup="CubeMX"/>
     </condition>
   </conditions>
 
   <components>
     <!-- CMSIS VIO Driver component for NUCLEO-U031R8 -->
-    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "NUCLEO-U031R8" Cversion="2.0.0" Capiversion="1.0.0" condition="STM32U031 CubeMX">
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "NUCLEO-U031R8" Cversion="2.0.0" Capiversion="1.0.0" condition="NUCLEO-U031R8 CubeMX">
       <description>Virtual I/O implementation for NUCLEO-U031R8</description>
       <RTE_Components_h>
         #define RTE_VIO_BOARD
