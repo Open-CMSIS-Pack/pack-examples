@@ -36,32 +36,23 @@
   </requirements>
 
   <conditions>
-    <!-- Device Condition -->
-    <condition id="STM32H7">
-      <description>STMicroelectronics STM32H7 Series devices</description>
-      <require Dvendor="STMicroelectronics:13" Dname="STM32H7*"/>
-      <deny    Dvendor="STMicroelectronics:13" Dname="STM32H7[R]*"/>
-      <deny    Dvendor="STMicroelectronics:13" Dname="STM32H7[S]*"/>
+    <!-- Board Condition -->
+    <condition id="STM32H743I-EVAL">
+      <description>STMicroelectronics STM32H743I-EVAL Board</description>
+      <require Dvendor="STMicroelectronics:13" Bname="STM32H743I-EVAL"/>
     </condition>
 
-    <!-- Device + CMSIS Conditions -->
-    <condition id="STM32H7 CMSIS">
-      <description>STMicroelectronics STM32H7 Device and CMSIS-CORE</description>
-      <require condition="STM32H7"/>
-      <require Cclass="CMSIS" Cgroup="CORE"/>
-    </condition>
-
-    <!-- Device + CMSIS + CubeMX Conditions -->
-    <condition id="STM32H7 CMSIS CubeMX">
-      <description>Requirement for CMSIS Driver</description>
-      <require condition="STM32H7 CMSIS"/>
+    <!-- Board + CubeMX Condition -->
+    <condition id="STM32H743I-EVAL CubeMX">
+      <description>STM32H743I-EVAL Board and CubeMX</description>
+      <require condition="STM32H743I-EVAL"/>
       <require Cclass="Device" Cgroup="CubeMX"/>
     </condition>
   </conditions>
 
   <components>
     <!-- CMSIS VIO Driver component for STM32H743I-EVAL -->
-    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "STM32H743I-EVAL" Cversion="2.0.0" Capiversion="1.0.0" condition="STM32H7 CMSIS CubeMX">
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant= "STM32H743I-EVAL" Cversion="2.0.0" Capiversion="1.0.0" condition="STM32H743I-EVAL CubeMX">
       <description>Virtual I/O implementation for STM32H743I-EVAL</description>
       <RTE_Components_h>
         #define RTE_VIO_BOARD
@@ -74,7 +65,7 @@
   </components>
 
   <csolution> 
-    <clayer type="Board" path="Layers/IoT" file="Board.clayer.yml" copy-to="Board/STM32H743I-EVAL" condition="STM32H7 CMSIS CubeMX"/>
+    <clayer type="Board" path="Layers/IoT" file="Board.clayer.yml" copy-to="Board/STM32H743I-EVAL" condition="STM32H743I-EVAL"/>
   </csolution>
 
   <boards>

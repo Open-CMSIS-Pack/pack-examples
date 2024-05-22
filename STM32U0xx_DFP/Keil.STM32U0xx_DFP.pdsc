@@ -16,6 +16,7 @@
       Removed Datasheet and Reference Manual from pack and replaced with permalink in the package description.
     </release>
     <release version="1.1.0-dev0">
+      Updated for new CMSIS-Toolbox CubeMX integration
       Add global generator
     </release>
     <release version="1.0.0" date="2024-04-04">

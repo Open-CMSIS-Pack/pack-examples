@@ -13,6 +13,7 @@
 
   <releases>
     <release version="4.0.0-dev0">
+      Updated for new CMSIS-Toolbox CubeMX integration
       Remove STM32CubeMX_FW_H7
       Remove board drivers (ADC, Buttons, GLCD, LED...)
       Remove all examples

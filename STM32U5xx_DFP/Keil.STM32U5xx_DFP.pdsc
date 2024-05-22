@@ -13,6 +13,7 @@
 
   <releases>
     <release version="3.0.0-dev0">
+      Updated for new CMSIS-Toolbox CubeMX integration
       Remove STM32CubeMX_FW_U5
       Remove previous generator (gpdsc)
       Add new global generator
