@@ -16,13 +16,10 @@
     <release version="2.0.0-dev1">
       Updated for new CMSIS-Toolbox CubeMX integration
       Pack Description:
-      - Add board layer
-    </release>
-    <release version="2.0.0-dev0">
-      Pack Description:
       - Add LICENSE file
-      - Update schemaVersion (1.7.28)
-      - Add external memory information to board description     
+      - Update schemaVersion (1.7.36)
+      - Add external memory information to board description
+      - Add board layer
       Remove BSP drivers
       CMSIS Drivers:
       - Update VIO driver to API 1.0.0
@@ -61,7 +58,7 @@
     <!-- Board Condition -->
     <condition id="B-U585I-IOT02A">
       <description>STMicroelectronics B-U585I-IOT02A Board</description>
-      <require Bvendor="STMicroelectronics:13" Bname="B-U585I-IOT02A"/>
+      <require Bvendor="STMicroelectronics" Bname="B-U585I-IOT02A"/>
     </condition>
 
     <!-- Board + CubeMX Condition -->
